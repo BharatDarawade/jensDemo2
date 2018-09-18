@@ -1,32 +1,13 @@
 pipeline {
     agent any
 
-    stages {
-        stage ('Compile Stage') {
+   node {
+// HEADS UP: this is Scripted Pipeline syntax
+    stage("Build") {
+                build("Project testing")
+                        build("Pipeline jenkins_pipeline_demo")
 
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn clean compile'
-                }
             }
-        }
-
-        stage ('Testing Stage') {
-
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn test'
-                }
-            }
-        }
-
-
-        stage ('Deployment Stage') {
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn deploy'
-                }
-            }
-        }
     }
+
 }
